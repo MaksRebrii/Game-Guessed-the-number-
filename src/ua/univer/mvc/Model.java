@@ -1,26 +1,46 @@
 package ua.univer.mvc;
 
+import java.util.ArrayList;
+
 public class Model {
+
     private int value;
-    private double doubleValue;
-    private String StringValue;
+    private ArrayList<Integer> historyEnteredNumbers = new ArrayList<>();
+    private int minBarrier;
+    private int maxBarrier;
+    public static final int GUESSEDNUMBER  = (int) (Math.random() * 100);
+
+    public Model() {
+        minBarrier = 0;
+        maxBarrier = 100;
+    }
 
     public int getValue() {
         return value;
     }
     public void setValue(int value) {
         this.value = value;
+        historyEnteredNumbers.add(value);
     }
-    public double getDoubleValue() {
-        return doubleValue;
+
+
+    public int getMinBarrier() {
+        return minBarrier;
     }
-    public void setDoubleValue(double doubleValue) {
-        this.doubleValue = doubleValue;
+
+    public void setMinBarrier(int minBarrier) {
+        this.minBarrier = minBarrier;
     }
-    public String getStringValue() {
-        return StringValue;
+
+    public int getMaxBarrier() {
+        return maxBarrier;
     }
-    public void setStringValue(String stringValue) {
-        StringValue = stringValue;
+
+    public void setMaxBarrier(int maxBarrier) {
+        this.maxBarrier = maxBarrier;
+    }
+
+    public String getHistory(){
+        return historyEnteredNumbers.toString();
     }
 }

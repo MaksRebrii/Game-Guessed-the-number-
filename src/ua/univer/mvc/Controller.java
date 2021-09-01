@@ -8,6 +8,7 @@ public class Controller {
 
     // Constants
 
+
     // REGEX
 
     public Controller(Model model, View view) {
@@ -19,48 +20,38 @@ public class Controller {
     public void processUser(){
         Scanner sc = new Scanner(System.in);
 
-        model.setValue(inputIntValueWithScanner(sc));
+        while (true){
+            //setting new value
+            model.setValue(inputIntValueWithScannerAndDiapason(sc));
+            view.printMessage(View.OUR_INT + model.getValue());
 
-        view.printMessage(View.OUR_INT + model.getValue());
+            if(model.getValue() == model.GUESSEDNUMBER){
+                view.printMessage(view.WIN);
+                break;
+            }
 
-        model.setDoubleValue(inputDoubleValueWithScanner(sc));
+            view.printMessage(view.TRY_AGAIN);
 
-        view.printMessage(View.OUR_DOUBLE + model.getDoubleValue());
 
-        model.setStringValue(inputStringValueWithScanner(sc));
-
-        view.printMessage(View.OUR_STRING + model.getStringValue());
-    }
-
-        // The Utility methods
-    private String inputStringValueWithScanner(Scanner sc) {
-        view.printMessage(View.INPUT_STRING_DATA);
-        //while ( ! sc.hasNextLine()){}
-        return sc.next();
-    }
-
-    private double inputDoubleValueWithScanner(Scanner sc) {
-        view.printMessage(View.INPUT_DOUBLE_DATA);
-        while (!sc.hasNextDouble()){
-            view.printMessage(View.WRONG_INPUT_DATA + View.INPUT_DOUBLE_DATA);
-            sc.next();
+            if(model.getValue() < model.GUESSEDNUMBER)
+                model.setMinBarrier(model.getValue());
+            else
+                model.setMaxBarrier(model.getValue());
         }
-        return sc.nextDouble();
+
     }
 
-    public int inputIntValueWithScanner(Scanner sc) {
-        view.printMessage(View.INPUT_INT_DATA);
-        while(!sc.hasNextInt()) {
-            view.printMessage(View.WRONG_INPUT_DATA + View.INPUT_INT_DATA);
-            sc.next();
-        }
-        return sc.nextInt();
-    }
+        // The Utilit y methods
 
-   /* public int inputIntValueWithScannerAndDiapason(Scanner sc) {
-        int res=0;
-        view.printMessage(view.INPUT_INT_DATA +
-                model.getMinBarrier() + model.getMaxBarrier());
+
+
+    public int inputIntValueWithScannerAndDiapason(Scanner sc) {
+        int res = 0;
+
+        view.printMessage(String.format("Range {%d, %d}", model.getMinBarrier(), model.getMaxBarrier()));
+        view.printMessage(view.ATTEMPTS + model.getHistory());
+        view.printMessage(view.OUR_LAST_ATTEMPT + model.getValue());
+        view.printMessage(view.INPUT_INT_DATA);
 
         while( true ) {
             // check int - value
@@ -69,6 +60,7 @@ public class Controller {
                         + view.INPUT_INT_DATA);
                 sc.next();
             }
+
             // check value in diapason
             if ((res = sc.nextInt()) <= model.getMinBarrier() ||
                     res >= model.getMaxBarrier()) {
@@ -79,7 +71,7 @@ public class Controller {
             break;
         }
         return res;
-    }*/
+    }
 
 
 }

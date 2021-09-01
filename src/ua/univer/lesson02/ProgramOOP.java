@@ -25,12 +25,12 @@ public class ProgramOOP {
         masObj[3] =cl1;
         masObj[4] =triangle1;
       //  masObj[5] = new Object();
-        for (var obj: masObj) {
+        /*for (var obj: masObj) {
             System.out.println(obj);
             if (obj instanceof Triangle){
                 Triangle tr = (Triangle) obj;
                 System.out.println(tr.getLengthAB());
             }
-        }
+        }*/
     }
 }
